@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Services Menu</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.header h1 {
+  font-size: 3em;
+  margin-bottom: 12px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.header .subtitle {
+  font-size: 1.2em;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  margin-top: 15px;
+  backdrop-filter: blur(10px);
+}
+
+/* Content */
+.content {
+  padding: 50px 40px;
+  background: #fafafa;
+}
+
+.category {
+  background: white;
+  border-radius: 16px;
+  padding: 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.category-icon {
+  font-size: 2.5em;
+  margin-right: 20px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.category-title {
+  font-size: 1.8em;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.services-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.service-item {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+  border-color: #e0e7ff;
+  transform: translateX(8px);
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.service-item:hover::before {
+  transform: scaleY(1);
+}
+
+.service-info {
+  flex: 1;
+}
+
+.service-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.service-desc {
+  color: #64748b;
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+
+.service-price {
+  font-size: 1.8em;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+/* Footer */
+.footer {
+  background: #f8fafc;
+  padding: 40px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.footer-title {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.footer-note {
+  display: flex;
+  align-items: start;
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  border-left: 3px solid #6366f1;
+}
+
+.footer-note span {
+  margin-right: 12px;
+  color: #6366f1;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.footer-note p {
+  color: #475569;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.cta {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  color: white;
+  text-align: center;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.3);
+}
+
+.cta h3 {
+  font-size: 1.6em;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.cta p {
+  font-size: 1.05em;
+  opacity: 0.95;
+  margin-bottom: 0;
+}
+
+.disclaimer {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.85em;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+  .header {
+    padding: 40px 25px;
+  }
+  .header h1 {
+    font-size: 2em;
+  }
+  .content {
+    padding: 30px 20px;
+  }
+  .category {
+    padding: 25px 20px;
+  }
+  .category-title {
+    font-size: 1.4em;
+  }
+  .service-item {
+    flex-direction: column;
+    align-items: start;
+  }
+  .service-price {
+    margin-left: 0;
+    margin-top: 12px;
+    font-size: 1.5em;
+  }
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <h1>Design Services</h1>
+      <p class="subtitle">Professional designs for your business & personal needs</p>
+      <div class="badge">Fast Delivery • Flexible Revisions</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Website Design -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon"></span>
+        <h2 class="category-title">Website Design</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">One-page Website</div>
+            <div class="service-desc">Clean, modern layout for portfolio, business, or personal brand</div>
+          </div>
+          <div class="service-price">₹2,500</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Multi-page Website</div>
+            <div class="service-desc">3–5 pages with sections for services, testimonials, contact</div>
+          </div>
+          <div class="service-price">₹5,000</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Landing Page</div>
+            <div class="service-desc">Marketing-focused single page with CTA buttons</div>
+          </div>
+          <div class="service-price">₹2,000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gift & Personalized Designs -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon"></span>
+        <h2 class="category-title">Gift & Personalized Designs</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Greeting Cards</div>
+            <div class="service-desc">Birthday, anniversary, festivals – digital or print-ready</div>
+          </div>
+          <div class="service-price">₹300</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Invitations</div>
+            <div class="service-desc">Weddings, parties, and events – printable or digital</div>
+          </div>
+          <div class="service-price">₹500</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">E-Cards</div>
+            <div class="service-desc">Animated or static for email sharing</div>
+          </div>
+          <div class="service-price">₹200</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poster & Marketing Designs -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon"></span>
+        <h2 class="category-title">Poster & Marketing Designs</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Event Posters</div>
+            <div class="service-desc">Concerts, workshops, festivals – print-ready</div>
+          </div>
+          <div class="service-price">₹600</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Marketing Posters</div>
+            <div class="service-desc">Promotions, sales, or product launches</div>
+          </div>
+          <div class="service-price">₹700</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Educational Posters</div>
+            <div class="service-desc">Infographics, school/college displays</div>
+          </div>
+          <div class="service-price">₹500</div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Social Media Posters</div>
+            <div class="service-desc">Optimized for Instagram, Facebook, and LinkedIn</div>
+          </div>
+          <div class="service-price">₹400</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Marketing -->
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon"></span>
+        <h2 class="category-title">Social Media Marketing</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-info">
+            <div class="service-name">Social Media Marketing</div>
+            <div class="service-desc">Strategy, content planning, and performance tracking</div>
+          </div>
+          <div class="service-price">₹4,999</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h3 class="footer-title">Important Notes</h3>
+    <div class="notes-grid">
+      <div class="footer-note">
+        <span>✓</span>
+        <p>Domain & hosting costs are separate</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h3>Ready to Start Your Project?</h3>
+      <p>Let's bring your vision to life with stunning designs!</p>
+      <!-- Download/print button removed as requested -->
+    </div>
+    <p class="disclaimer">* All prices are starting points and may vary based on complexity and requirements</p>
+  </div>
+</div>
+
+<script>
+// Smooth animations on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.category').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'all 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
